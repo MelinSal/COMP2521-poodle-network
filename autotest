@@ -1,0 +1,191 @@
+#!/bin/sh
+
+cd "$(dirname "$0")"
+
+trap "rm -f .time" EXIT
+
+main()
+{
+	if [ $# -ne 1 ]
+	then
+		echo "usage: $0 <task number (1-4)>"
+		exit 1
+	fi
+
+	case "$1" in
+		1|2|3|4) ;;
+		*) echo "invalid task number '$1'"
+		   exit 1 ;;
+	esac
+
+	compile
+	echo
+
+	case "$1" in
+		1) test_task1 ;;
+		2) test_task2 ;;
+		3) test_task3 ;;
+		4) test_task4 ;;
+	esac
+
+	echo
+}
+
+compile()
+{
+	echo "================================"
+	echo "** Compilation"
+	echo "================================"
+
+	make
+
+	if [ $? -ne 0 ]
+	then
+		exit 1
+	fi
+}
+
+test_task1()
+{
+	echo "================================"
+	echo "** Tests for Task 1"
+	echo "================================"
+
+	data_dir="task1"
+
+	for test_file in "$data_dir"/*.in
+	do
+		test_name="$(basename "$test_file" .in)"
+		out_file="$data_dir/$test_name.out"
+		exp_file="$data_dir/$test_name.exp"
+
+		echo "--------------------------------"
+		echo "** Test $test_name ($test_file)"
+		echo "--------------------------------"
+
+		/usr/bin/time -f "%U" -o .time ./testPoodle "$test_file" > "$out_file"
+
+		if [ $? -ne 0 ]
+		then
+			echo "** Test failed (runtime error)"
+		elif [ ! -f "$exp_file" ]
+		then
+			echo "** Expected output not available"
+			echo "** Time taken (user time): $(cat .time) seconds"
+		elif ! cmp -s "$out_file" "$exp_file"
+		then
+			echo "** Test failed (incorrect output)"
+		else
+			echo "** Your output was correct"
+			echo "** Time taken (user time): $(cat .time) seconds"
+		fi
+	done
+}
+
+test_task2()
+{
+	echo "================================"
+	echo "** Tests for Task 2"
+	echo "================================"
+
+	data_dir="task2"
+
+	for test_file in "$data_dir"/*.in
+	do
+		test_name="$(basename "$test_file" .in)"
+		out_file="$data_dir/$test_name.out"
+		exp_file="$data_dir/$test_name.exp"
+
+		echo "--------------------------------"
+		echo "** Test $test_name ($test_file)"
+		echo "--------------------------------"
+
+		/usr/bin/time -f "%U" -o .time ./testPoodle "$test_file" > "$out_file"
+
+		if [ $? -ne 0 ]
+		then
+			echo "** Test failed (runtime error)"
+		elif [ ! -f "$exp_file" ]
+		then
+			echo "** Expected output not available"
+		elif ! cmp -s "$out_file" "$exp_file"
+		then
+			echo "** Test failed (incorrect output)"
+		else
+			echo "** Your output was correct"
+		fi
+	done
+}
+
+test_task3()
+{
+	echo "================================"
+	echo "** Tests for Task 3"
+	echo "================================"
+
+	data_dir="task3"
+
+	for test_file in "$data_dir"/*.in
+	do
+		test_name="$(basename "$test_file" .in)"
+		out_file="$data_dir/$test_name.out"
+		exp_file="$data_dir/$test_name.exp"
+
+		echo "--------------------------------"
+		echo "** Test $test_name ($test_file)"
+		echo "--------------------------------"
+
+		/usr/bin/time -f "%U" -o .time ./testPoodle "$test_file" > "$out_file"
+
+		if [ $? -ne 0 ]
+		then
+			echo "** Test failed (runtime error)"
+		elif [ ! -f "$exp_file" ]
+		then
+			echo "** Expected output not available"
+		elif ! cmp -s "$out_file" "$exp_file"
+		then
+			echo "** Test failed (incorrect output)"
+		else
+			echo "** Your output was correct"
+		fi
+	done
+}
+
+test_task4()
+{
+	echo "================================"
+	echo "** Tests for Task 4"
+	echo "================================"
+
+	data_dir="task4"
+
+	for test_file in "$data_dir"/*.in
+	do
+		test_name="$(basename "$test_file" .in)"
+		out_file="$data_dir/$test_name.out"
+		exp_file="$data_dir/$test_name.exp"
+
+		echo "--------------------------------"
+		echo "** Test $test_name ($test_file)"
+		echo "--------------------------------"
+
+		/usr/bin/time -f "%U" -o .time ./testPoodle "$test_file" > "$out_file"
+
+		if [ $? -ne 0 ]
+		then
+			echo "** Test failed (runtime error)"
+		elif [ ! -f "$exp_file" ]
+		then
+			echo "** Expected output not available"
+		elif ! cmp -s "$out_file" "$exp_file"
+		then
+			echo "** Test failed (incorrect output)"
+		else
+			echo "** Your output was correct"
+		fi
+	done
+}
+
+main "$@"
+
