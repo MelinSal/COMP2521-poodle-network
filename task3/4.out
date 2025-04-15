@@ -1,0 +1,12 @@
+Plan:
+- computer 0 poodled at 16 seconds
+  - pug sent to: 3
+- computer 3 poodled at 21 seconds
+  - pug sent to: 4
+- computer 4 poodled at 26 seconds
+  - pug sent to: 1, 2, 6
+- computer 6 poodled at 31 seconds
+  - pug sent to: 7
+- computer 1 poodled at 37 seconds
+- computer 7 poodled at 38 seconds
+- computer 2 poodled at 43 seconds
