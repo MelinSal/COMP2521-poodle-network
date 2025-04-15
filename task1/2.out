@@ -1,0 +1,5 @@
+Probe path: 5 -> 4 -> 0 -> 1 -> 2 -> 3 -> 6
+
+Result: Error
+Reason: No connection
+Elapsed time: 195 seconds

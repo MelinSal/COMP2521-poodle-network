@@ -1,0 +1,5 @@
+Probe path: 1 -> 0 -> 4 -> 5 -> 2 -> 6
+
+Result: Error
+Reason: No permission
+Elapsed time: 153 seconds
